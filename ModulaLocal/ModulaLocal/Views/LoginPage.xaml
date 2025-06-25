@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ModulaLocal.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:ModulaLocal.ViewModels"
+    x:DataType="viewmodels:LoginViewModel"
+    Shell.NavBarIsVisible="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid
+            Padding="20,50,20,0"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="CenterAndExpand"
+                Text="Welcome Back!"
+                TextColor="#1C375C" />
+            <Label
+                Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                Text="Login in to account"
+                TextColor="#1C375C" />
+            <BoxView Grid.Row="2" />
+            <Label
+                Grid.Row="3"
+                HorizontalOptions="StartAndExpand"
+                Text=" User Name"
+                TextColor="#1C375C" />
+            <Entry
+                Grid.Row="4"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
+            <BoxView Grid.Row="5" />
+            <Label
+                Grid.Row="6"
+                HorizontalOptions="StartAndExpand"
+                Text=" Password"
+                TextColor="#1C375C" />
+            <Entry
+                Grid.Row="7"
+                HorizontalOptions="FillAndExpand"
+                IsPassword="True"
+                VerticalOptions="FillAndExpand" />
+            <BoxView Grid.Row="8" />
+            <Button
+                Grid.Row="9"
+                BackgroundColor="#1C375C"
+                Command="{Binding LoginCommand}"
+                CornerRadius="20"
+                Text="Login" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
