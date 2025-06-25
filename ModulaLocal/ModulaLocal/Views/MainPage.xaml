@@ -4,62 +4,104 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:ModulaLocal.ViewModels"
-    Title="{Binding Title}">
-
+    Title="">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Order="Primary"
+            Priority="0"
+            Text="Call" />
+        <ToolbarItem
+            Order="Primary"
+            Priority="0"
+            Text="Rerturn" />
+        <ToolbarItem
+            Order="Primary"
+            Priority="0"
+            Text="Done" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackLayout
-            BackgroundColor="{StaticResource Accent}"
-            HorizontalOptions="Fill"
-            VerticalOptions="FillAndExpand">
-            <StackLayout
-                HorizontalOptions="Center"
-                Orientation="Horizontal"
-                VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image
-                        HeightRequest="64"
-                        Source="xamarin_logo.png"
-                        VerticalOptions="Center" />
-                </ContentView>
-            </StackLayout>
-        </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout
-                Padding="30,24,30,24"
-                Orientation="Vertical"
-                Spacing="10">
-                <Label FontSize="Title" Text="Start developing now" />
+    <CollectionView
+        HorizontalOptions="FillAndExpand"
+        ItemsSource="{Binding Items}"
+        SelectionMode="Single"
+        VerticalOptions="FillAndExpand">
+        <CollectionView.Header>
+            <Grid Padding="8" ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <BoxView Grid.Column="0" VerticalOptions="Center" />
                 <Label
-                    Padding="0,0,0,0"
-                    FontSize="16"
-                    Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" />
-                <Label Padding="0,24,0,0" FontSize="16">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Learn more at " />
-                                <Span FontAttributes="Bold" Text="https://aka.ms/xamarin-quickstart" />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button
-                    Margin="0,10,0,0"
-                    BackgroundColor="{StaticResource Primary}"
-                    Text="Learn more"
-                    TextColor="White" />
-            </StackLayout>
-        </ScrollView>
-    </Grid>
-
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="Mã sản phẩm"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="2"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="Tên sản phẩm"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="3"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="QRCode"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="4"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="Vị trí"
+                    VerticalOptions="Center" />
+            </Grid>
+        </CollectionView.Header>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="8" ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox
+                        Grid.Column="0"
+                        IsChecked="{Binding IsSelected}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="22"
+                        Text="{Binding ProductCode}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="2"
+                        FontSize="22"
+                        Text="{Binding ProductName}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="3"
+                        FontSize="22"
+                        Text="{Binding QRCode}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="4"
+                        FontSize="22"
+                        Text="{Binding AddressModula}"
+                        VerticalOptions="Center" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

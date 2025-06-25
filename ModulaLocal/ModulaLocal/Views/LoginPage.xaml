@@ -9,68 +9,84 @@
     x:DataType="viewmodels:LoginViewModel"
     Shell.NavBarIsVisible="False"
     mc:Ignorable="d">
+    <ContentPage.Resources>
+        <OnIdiom
+            x:Key="PagePadding"
+            x:TypeArguments="Thickness"
+            Phone="20,50,20,0"
+            Tablet="60,80,60,20" />
+        <OnIdiom
+            x:Key="LogoRowHeight"
+            x:TypeArguments="GridLength"
+            Phone="3*"
+            Tablet="2*" />
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid
-            Padding="20,50,20,0"
-            HorizontalOptions="FillAndExpand"
-            RowSpacing="0"
-            VerticalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="100" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="60" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label
-                Grid.Row="0"
-                FontAttributes="Bold"
-                FontSize="24"
-                HorizontalOptions="CenterAndExpand"
-                Text="Welcome Back!"
-                TextColor="#1C375C" />
-            <Label
-                Grid.Row="1"
-                HorizontalOptions="CenterAndExpand"
-                Text="Login in to account"
-                TextColor="#1C375C" />
-            <BoxView Grid.Row="2" />
-            <Label
-                Grid.Row="3"
-                HorizontalOptions="StartAndExpand"
-                Text=" User Name"
-                TextColor="#1C375C" />
-            <Entry
-                Grid.Row="4"
+        <Grid>
+            <Image
+                Aspect="AspectFill"
                 HorizontalOptions="FillAndExpand"
+                Opacity="0.9"
+                Source="ocean_background.jpg"
                 VerticalOptions="FillAndExpand" />
-            <BoxView Grid.Row="5" />
-            <Label
-                Grid.Row="6"
-                HorizontalOptions="StartAndExpand"
-                Text=" Password"
-                TextColor="#1C375C" />
-            <Entry
-                Grid.Row="7"
-                HorizontalOptions="FillAndExpand"
-                IsPassword="True"
-                VerticalOptions="FillAndExpand" />
-            <BoxView Grid.Row="8" />
-            <Button
-                Grid.Row="9"
-                BackgroundColor="#1C375C"
-                Command="{Binding LoginCommand}"
-                CornerRadius="20"
-                Text="Login" />
+            <Grid
+                Padding="{StaticResource PagePadding}"
+                ColumnDefinitions="*"
+                RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource LogoRowHeight}" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  1) Top logo that takes 30% of height in both orientations  -->
+                <Image
+                    Grid.Row="0"
+                    Aspect="AspectFit"
+                    HeightRequest="{OnIdiom Phone=200,
+                                            Tablet=300}"
+                    HorizontalOptions="Center"
+                    Source="rtc_icon.png"
+                    VerticalOptions="Center" />
+
+                <!--  2) Username  -->
+                <Label
+                    Grid.Row="2"
+                    FontSize="Large"
+                    Text="User Name"
+                    TextColor="#1C375C" />
+                <Entry Grid.Row="3" HorizontalOptions="FillAndExpand" />
+
+                <!--  3) Password  -->
+                <Label
+                    Grid.Row="5"
+                    FontSize="Large"
+                    Text="Password"
+                    TextColor="#1C375C" />
+                <Entry
+                    Grid.Row="6"
+                    HorizontalOptions="FillAndExpand"
+                    IsPassword="True" />
+
+                <!--  4) Login button  -->
+                <Button
+                    Grid.Row="8"
+                    BackgroundColor="#1C375C"
+                    Command="{Binding LoginCommand}"
+                    CornerRadius="20"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Login"
+                    TextColor="White" />
+                <BoxView Grid.Row="9" />
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
