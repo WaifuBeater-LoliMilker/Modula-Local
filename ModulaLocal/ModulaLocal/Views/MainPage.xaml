@@ -8,20 +8,39 @@
     <ContentPage.BindingContext>
         <vm:MainPageViewModel />
     </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Order="Primary"
-            Priority="0"
-            Text="Call" />
-        <ToolbarItem
-            Order="Primary"
-            Priority="0"
-            Text="Rerturn" />
-        <ToolbarItem
-            Order="Primary"
-            Priority="0"
-            Text="Done" />
-    </ContentPage.ToolbarItems>
+    <Shell.TitleView>
+        <Grid
+            Padding="0"
+            ColumnSpacing="0"
+            VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <BoxView Grid.Column="0" />
+            <Button
+                Grid.Column="1"
+                FontSize="{OnIdiom Phone=12,
+                                   Tablet=17}"
+                ImageSource="call.png"
+                Text="Call" />
+            <Button
+                Grid.Column="2"
+                FontSize="{OnIdiom Phone=12,
+                                   Tablet=17}"
+                ImageSource="return_tray.png"
+                Text="Return" />
+            <Button
+                Grid.Column="3"
+                FontSize="{OnIdiom Phone=12,
+                                   Tablet=17}"
+                ImageSource="done.png"
+                Text="Done" />
+        </Grid>
+    </Shell.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
@@ -33,7 +52,7 @@
         SelectionMode="Single"
         VerticalOptions="FillAndExpand">
         <CollectionView.Header>
-            <Grid Padding="8" ColumnSpacing="16">
+            <Grid Padding="1" ColumnSpacing="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35" />
                     <ColumnDefinition Width="*" />
@@ -41,38 +60,45 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <BoxView Grid.Column="0" VerticalOptions="Center" />
+                <BoxView Grid.Column="0" />
                 <Label
                     Grid.Column="1"
                     FontAttributes="Bold"
                     FontSize="24"
+                    HorizontalTextAlignment="Center"
                     Text="Mã sản phẩm"
-                    VerticalOptions="Center" />
+                    VerticalTextAlignment="Center" />
                 <Label
                     Grid.Column="2"
                     FontAttributes="Bold"
                     FontSize="24"
+                    HorizontalTextAlignment="Center"
                     Text="Tên sản phẩm"
-                    VerticalOptions="Center" />
+                    VerticalTextAlignment="Center" />
                 <Label
                     Grid.Column="3"
                     FontAttributes="Bold"
                     FontSize="24"
+                    HorizontalTextAlignment="Center"
                     Text="QRCode"
-                    VerticalOptions="Center" />
+                    VerticalTextAlignment="Center" />
                 <Label
                     Grid.Column="4"
                     FontAttributes="Bold"
                     FontSize="24"
+                    HorizontalTextAlignment="Center"
                     Text="Vị trí"
-                    VerticalOptions="Center" />
+                    VerticalTextAlignment="Center" />
+
             </Grid>
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid Padding="8" ColumnSpacing="16">
+                <Grid Padding="1" ColumnSpacing="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
