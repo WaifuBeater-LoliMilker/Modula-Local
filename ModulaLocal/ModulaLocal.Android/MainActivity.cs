@@ -16,7 +16,7 @@ namespace ModulaLocal.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
+            //global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             //uncomment to go fullscreen
             //Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
             //Window.ClearFlags(WindowManagerFlags.TranslucentStatus);

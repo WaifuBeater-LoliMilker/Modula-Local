@@ -3,6 +3,8 @@
     x:Class="ModulaLocal.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
+    xmlns:dxg="http://schemas.devexpress.com/xamarin/2014/forms/datagrid"
     xmlns:vm="clr-namespace:ModulaLocal.ViewModels"
     Title="">
     <ContentPage.BindingContext>
@@ -46,88 +48,112 @@
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <CollectionView
-        HorizontalOptions="FillAndExpand"
-        ItemsSource="{Binding Items}"
-        SelectionMode="Single"
-        VerticalOptions="FillAndExpand">
-        <CollectionView.Header>
-            <Grid Padding="1" ColumnSpacing="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="35" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <BoxView Grid.Column="0" />
-                <Label
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="24"
-                    HorizontalTextAlignment="Center"
-                    Text="Mã sản phẩm"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    Grid.Column="2"
-                    FontAttributes="Bold"
-                    FontSize="24"
-                    HorizontalTextAlignment="Center"
-                    Text="Tên sản phẩm"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    Grid.Column="3"
-                    FontAttributes="Bold"
-                    FontSize="24"
-                    HorizontalTextAlignment="Center"
-                    Text="QRCode"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    Grid.Column="4"
-                    FontAttributes="Bold"
-                    FontSize="24"
-                    HorizontalTextAlignment="Center"
-                    Text="Vị trí"
-                    VerticalTextAlignment="Center" />
-
-            </Grid>
-        </CollectionView.Header>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid Padding="1" ColumnSpacing="1">
+    <ContentView Padding="10" BackgroundColor="White">
+        <CollectionView
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding Items}"
+            SelectionMode="Single"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.Header>
+                <Grid
+                    Padding="1"
+                    BackgroundColor="#E0E6F8"
+                    ColumnSpacing="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="35" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <CheckBox
-                        Grid.Column="0"
-                        IsChecked="{Binding IsSelected}"
-                        VerticalOptions="Center" />
+                    <CheckBox Grid.Column="0" VerticalOptions="Center" />
                     <Label
                         Grid.Column="1"
-                        FontSize="22"
-                        Text="{Binding ProductCode}"
-                        VerticalOptions="Center" />
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="Mã sản phẩm"
+                        VerticalTextAlignment="Center" />
                     <Label
                         Grid.Column="2"
-                        FontSize="22"
-                        Text="{Binding ProductName}"
-                        VerticalOptions="Center" />
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="Tên sản phẩm"
+                        VerticalTextAlignment="Center" />
                     <Label
                         Grid.Column="3"
-                        FontSize="22"
-                        Text="{Binding QRCode}"
-                        VerticalOptions="Center" />
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="QRCode"
+                        VerticalTextAlignment="Center" />
                     <Label
                         Grid.Column="4"
-                        FontSize="22"
-                        Text="{Binding AddressModula}"
-                        VerticalOptions="Center" />
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="Vị trí"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="5"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="Trạng thái"
+                        VerticalTextAlignment="Center" />
                 </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="1" ColumnSpacing="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            Grid.Column="0"
+                            HorizontalOptions="Center"
+                            IsChecked="{Binding IsSelected}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Text="{Binding ProductCode}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="2"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Text="{Binding ProductName}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="3"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Text="{Binding AddressBox}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="4"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Text="{Binding ModulaLocationName}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="5"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Text="{Binding StatusText}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentView>
 </ContentPage>

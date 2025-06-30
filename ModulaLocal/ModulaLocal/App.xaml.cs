@@ -1,5 +1,6 @@
 ﻿using ModulaLocal.Services;
 using Xamarin.Forms;
+using Xamarin.Forms.DataGrid;
 
 namespace ModulaLocal
 {
@@ -8,8 +9,10 @@ namespace ModulaLocal
         public App()
         {
             InitializeComponent();
-
-            //DependencyService.Register<MockDataStore>();
+            DependencyService.Register<ApiService>();
+            DependencyService.Register<LogInStore>();
+            DependencyService.Register<ModulaStore>();
+            //DataGridComponent.Init();
             MainPage = new AppShell();
             Shell.Current.GoToAsync("//LoginPage");
         }
