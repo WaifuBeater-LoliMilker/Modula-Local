@@ -1,5 +1,6 @@
 ﻿using ModulaLocal.Models;
 using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace ModulaLocal.Services
 {
     public class LogInStore
     {
+        private LogInInfo info;
         public async Task<bool> LoginAsync(string username, string password)
         {
             var apiService = DependencyService.Get<ApiService>();
@@ -23,17 +25,21 @@ namespace ModulaLocal.Services
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await apiService.Client.PostAsync("/home/login", jsonContent);
+            var response = await apiService.Client.PostAsync("home/login", jsonContent);
 
             if (!response.IsSuccessStatusCode)
                 return false;
 
             var json = await response.Content.ReadAsStringAsync();
-            var loginResult = JsonConvert.DeserializeObject<LogInInfo>(json);
+            var info = JsonConvert.DeserializeObject<LogInInfo>(json);
 
-            apiService.SetAuthorizationHeader(loginResult.access_token);
+            apiService.SetAuthorizationHeader(info.access_token);
 
             return true;
+        }
+        public DateTime? GetTokenExpireTime()
+        {
+            return info.ExpiresDateTime;
         }
     }
 }

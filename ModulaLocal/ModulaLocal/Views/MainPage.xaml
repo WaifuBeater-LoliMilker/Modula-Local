@@ -20,23 +20,39 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <BoxView Grid.Column="0" />
             <Button
+                x:Name="RefreshBtn"
                 Grid.Column="1"
+                Clicked="RefreshBtn_Clicked"
+                Command="{Binding LoadDataCommand}"
+                FontSize="{OnIdiom Phone=12,
+                                   Tablet=17}"
+                ImageSource="refresh.png"
+                Text="Refresh" />
+            <Button
+                x:Name="CallBtn"
+                Grid.Column="2"
+                Command="{Binding CallCommand}"
                 FontSize="{OnIdiom Phone=12,
                                    Tablet=17}"
                 ImageSource="call.png"
                 Text="Call" />
             <Button
-                Grid.Column="2"
+                x:Name="ReturnBtn"
+                Grid.Column="3"
+                Command="{Binding ReturnCommand}"
                 FontSize="{OnIdiom Phone=12,
                                    Tablet=17}"
                 ImageSource="return_tray.png"
                 Text="Return" />
             <Button
-                Grid.Column="3"
+                x:Name="DoneBtn"
+                Grid.Column="4"
+                Command="{Binding DoneCommand}"
                 FontSize="{OnIdiom Phone=12,
                                    Tablet=17}"
                 ImageSource="done.png"
@@ -52,13 +68,15 @@
         <CollectionView
             HorizontalOptions="FillAndExpand"
             ItemsSource="{Binding Items}"
+            SelectedItem="{Binding FocusedRow, Mode=TwoWay}"
             SelectionMode="Single"
             VerticalOptions="FillAndExpand">
             <CollectionView.Header>
                 <Grid
                     Padding="1"
                     BackgroundColor="#E0E6F8"
-                    ColumnSpacing="1">
+                    ColumnSpacing="1"
+                    HeightRequest="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="35" />
                         <ColumnDefinition Width="*" />
@@ -67,13 +85,18 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <CheckBox Grid.Column="0" VerticalOptions="Center" />
+                    <CheckBox
+                        x:Name="SelectAllCheckbox"
+                        Grid.Column="0"
+                        CheckedChanged="SelectAllCheckbox_CheckedChanged"
+                        VerticalOptions="Center" />
                     <Label
                         Grid.Column="1"
                         FontAttributes="Bold"
                         FontSize="24"
                         HorizontalTextAlignment="Center"
                         Text="Mã sản phẩm"
+                        TextColor="Black"
                         VerticalTextAlignment="Center" />
                     <Label
                         Grid.Column="2"
@@ -81,6 +104,7 @@
                         FontSize="24"
                         HorizontalTextAlignment="Center"
                         Text="Tên sản phẩm"
+                        TextColor="Black"
                         VerticalTextAlignment="Center" />
                     <Label
                         Grid.Column="3"
@@ -88,6 +112,7 @@
                         FontSize="24"
                         HorizontalTextAlignment="Center"
                         Text="QRCode"
+                        TextColor="Black"
                         VerticalTextAlignment="Center" />
                     <Label
                         Grid.Column="4"
@@ -95,14 +120,42 @@
                         FontSize="24"
                         HorizontalTextAlignment="Center"
                         Text="Vị trí"
+                        TextColor="Black"
                         VerticalTextAlignment="Center" />
-                    <Label
+                    <Grid
                         Grid.Column="5"
-                        FontAttributes="Bold"
-                        FontSize="24"
-                        HorizontalTextAlignment="Center"
-                        Text="Trạng thái"
-                        VerticalTextAlignment="Center" />
+                        ColumnSpacing="4"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SortStatusGrid_Tapped" />
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Column="0"
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            HorizontalOptions="End"
+                            HorizontalTextAlignment="End"
+                            Text="Trạng thái"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            x:Name="SortStatusLabel"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            HorizontalOptions="Start"
+                            Text=""
+                            TextColor="Black"
+                            VerticalTextAlignment="Start" />
+                    </Grid>
                 </Grid>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
@@ -118,38 +171,39 @@
                         </Grid.ColumnDefinitions>
                         <CheckBox
                             Grid.Column="0"
+                            CheckedChanged="CheckBox_CheckedChanged"
                             HorizontalOptions="Center"
-                            IsChecked="{Binding IsSelected}"
+                            IsChecked="{Binding IsSelected, Mode=TwoWay}"
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
                             FontSize="22"
-                            HorizontalOptions="Center"
                             Text="{Binding ProductCode}"
+                            TextColor="Black"
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="2"
                             FontSize="22"
-                            HorizontalOptions="Center"
                             Text="{Binding ProductName}"
+                            TextColor="Black"
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="3"
                             FontSize="22"
-                            HorizontalOptions="Center"
                             Text="{Binding AddressBox}"
+                            TextColor="Black"
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="4"
                             FontSize="22"
-                            HorizontalOptions="Center"
                             Text="{Binding ModulaLocationName}"
+                            TextColor="Black"
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="5"
                             FontSize="22"
-                            HorizontalOptions="Center"
                             Text="{Binding StatusText}"
+                            TextColor="Black"
                             VerticalOptions="Center" />
                     </Grid>
                 </DataTemplate>

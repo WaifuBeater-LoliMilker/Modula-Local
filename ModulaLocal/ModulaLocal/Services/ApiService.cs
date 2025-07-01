@@ -11,7 +11,7 @@ namespace ModulaLocal.Services
         {
             Client = new HttpClient
             {
-                BaseAddress = new Uri("http://10.20.29.65:8088/rerpapi/api")
+                BaseAddress = new Uri("http://10.20.29.65:8088/rerpapi/api/")
             };
             Client.DefaultRequestHeaders.Add("Accept", "application/json");
         }
@@ -22,6 +22,10 @@ namespace ModulaLocal.Services
                 Client.DefaultRequestHeaders.Remove("Authorization");
 
             Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+        }
+        public void RemoveToken()
+        {
+            Client.DefaultRequestHeaders.Remove("Authorization");
         }
     }
 }

@@ -14,12 +14,12 @@ namespace ModulaLocal.ViewModels
         public string Username
         {
             get => username;
-            set { username = value; }
+            set { username = value; OnPropertyChanged(nameof(Username)); }
         }
         public string Password
         {
             get => password;
-            set { password = value; }
+            set { password = value; OnPropertyChanged(nameof(Password)); }
         }
         public Command LoginCommand { get; }
 
@@ -31,11 +31,13 @@ namespace ModulaLocal.ViewModels
         private async void OnLoginClicked(object obj)
         {
             var store = DependencyService.Get<LogInStore>();
-            var loggedIn = await store.LoginAsync(username, password);
+            var loggedIn = await store.LoginAsync(Username, Password);
+            //var loggedIn = true;
             if (loggedIn)
             {
                 // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                Username = Password = "";
             }
             else
             {

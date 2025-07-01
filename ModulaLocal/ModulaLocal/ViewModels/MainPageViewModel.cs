@@ -1,25 +1,29 @@
 ﻿using ModulaLocal.Models;
+using ModulaLocal.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ModulaLocal.ViewModels
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : BaseViewModel
     {
         #region Fields
 
-        private List<BorrowTicket> items;
+        private ObservableCollection<BorrowTicket> items;
         private List<BorrowTicket> selectedItems;
+        private BorrowTicket focusedRow;
 
         #endregion Fields
 
         #region Properties
 
-        public List<BorrowTicket> Items
+        public ObservableCollection<BorrowTicket> Items
         {
             get => items;
             set { items = value; OnPropertyChanged(nameof(Items)); }
@@ -28,81 +32,129 @@ namespace ModulaLocal.ViewModels
         public List<BorrowTicket> SelectedItems
         {
             get => selectedItems;
-            set
-            {
-                selectedItems = value;
-            }
+            set { selectedItems = value; }
+        }
+
+        public BorrowTicket FocusedRow
+        {
+            get => focusedRow;
+            set { focusedRow = value; }
         }
 
         #endregion Properties
 
-        #region INotifyPropertyChanged implementation
+        #region Commands
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand LoadDataCommand => new Command(async () => await OnLoadData());
+        public ICommand CallCommand => new Command(async () => await OnCall());
+        public ICommand ReturnCommand => new Command(async () => await OnReturn());
+        public ICommand DoneCommand => new Command(async () => await OnDone());
 
-        private void OnPropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-
-        #endregion INotifyPropertyChanged implementation
+        #endregion Commands
 
         public MainPageViewModel()
         {
-            Items = new List<BorrowTicket>
+            Items = new ObservableCollection<BorrowTicket>();
+        }
+
+        private async Task OnLoadData()
+        {
+            var modulaStore = DependencyService.Get<ModulaStore>();
+            try
             {
-                new BorrowTicket
+                var result = await modulaStore.GetAll();
+                Items.Clear();
+                foreach (var item in result)
                 {
-                    TotalPage = 1,
-                    ID = 82680,
-                    Status = 7,
-                    StatusNew = 7,
-                    ProductRTCID = 1,
-                    ProductRTCQRCodeID = 0,
-                    DateBorrow = DateTime.Parse("2025-06-04T19:54:02.087"),
-                    DateReturnExpected = DateTime.Parse("2025-06-04T00:00:00"),
-                    PeopleID = 1181,
-                    Project = "13",
-                    DateReturn = null,
-                    Note = "332",
-                    NumberBorrow = null,
-                    AdminConfirm = false,
-                    BillExportTechnicalID = 0,
-                    FullName = "NV076 - Lê Thế Anh",
-                    ProductGroupRTCID = 75,
-                    ProductCode = "VL-A01W-1-3P VD1",
-                    ProductName = "AREA LIGHT",
-                    Maker = "VST",
-                    UnitCountID = 11,
-                    Number = 0,
-                    StatusProduct = false,
-                    CreateDate = DateTime.Parse("2020-07-01T00:00:00"),
-                    NumberInStore = 0,
-                    Serial = "VD1",
-                    SerialNumber = "VD1",
-                    PartNumber = "VD1",
-                    CreatedBy = "AdminTech",
-                    LocationImg = "",
-                    ProductCodeRTC = "Z00000001",
-                    BorrowCustomer = true,
-                    AddressBox = "K2-T3.3-K2-T3.3 VST LIGHT (Bar light)",
-                    BillExportCode = "",
-                    BillTypeText = "",
-                    BillStatus = 0,
-                    IsDelete = null,
-                    DepartmentName = "Kỹ thuật",
-                    ProductQRCode = null,
-                    UnitCountName = "PCS",
-                    UserZaloID = "",
-                    ModulaLocationName = " - ",
-                    ModulaLocationCode = "",
-                    AxisX = 0,
-                    AxisY = 0,
-                    StatusText = "Đăng kí mượn",
-                    RowNumber = 3,
-                    DualDate = 0
+                    Items.Add(item);
                 }
-            };
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Thông báo", ex.Message, "OK");
+            }
+        }
+
+        private async Task OnCall()
+        {
+            if (FocusedRow == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Thông báo", "Vui lòng chọn sản phẩm trước khi gọi khay", "OK");
+            }
+            var modulaStore = DependencyService.Get<ModulaStore>();
+            try
+            {
+                var data = new TrayInfo
+                {
+                    Code = FocusedRow.ModulaLocationCode,
+                    Name = FocusedRow.ProductCode,
+                    AxisX = FocusedRow.AxisX,
+                    AxisY = FocusedRow.AxisY
+                };
+                var result = await modulaStore.CallTray(data);
+                if (!result)
+                    await App.Current.MainPage.DisplayAlert("Thông báo", "Thao tác không thành công, vui lòng thử lại", "OK");
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Thông báo", ex.Message, "OK");
+            }
+        }
+
+        private async Task OnReturn()
+        {
+            if (FocusedRow == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Thông báo", "Vui lòng chọn sản phẩm trước khi gọi khay", "OK");
+            }
+            var modulaStore = DependencyService.Get<ModulaStore>();
+            try
+            {
+                var data = new TrayInfo
+                {
+                    Code = FocusedRow.ModulaLocationCode,
+                    Name = FocusedRow.ProductCode,
+                    AxisX = FocusedRow.AxisX,
+                    AxisY = FocusedRow.AxisY
+                };
+                var result = await modulaStore.ReturnTray(data);
+                if (!result)
+                    await App.Current.MainPage.DisplayAlert("Thông báo", "Thao tác không thành công, vui lòng thử lại", "OK");
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Thông báo", ex.Message, "OK");
+            }
+        }
+
+        private async Task OnDone()
+        {
+            var modulaStore = DependencyService.Get<ModulaStore>();
+            try
+            {
+                var rows = new List<ModulaStatusUpdate>();
+                foreach (var item in SelectedItems)
+                {
+                    var row = new ModulaStatusUpdate
+                    {
+                        ID = item.ID,
+                        PeopleID = item.PeopleID,
+                        StatusPerson = item.IsBorrow ? 1 : 2
+                    };
+                    rows.Add(row);
+                }
+                await modulaStore.Update(rows);
+                var result = await modulaStore.GetAll();
+                Items.Clear();
+                foreach (var item in result)
+                {
+                    Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Thông báo", ex.Message, "OK");
+            }
         }
     }
 }

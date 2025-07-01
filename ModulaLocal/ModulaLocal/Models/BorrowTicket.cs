@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ModulaLocal.Views;
+using System;
 using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace ModulaLocal.Models
 {
@@ -53,6 +55,7 @@ namespace ModulaLocal.Models
         public string StatusText { get; set; }
         public int RowNumber { get; set; }
         public int DualDate { get; set; }
+        public bool IsBorrow { get; set; }
         bool isSelected;
         public bool IsSelected
         {

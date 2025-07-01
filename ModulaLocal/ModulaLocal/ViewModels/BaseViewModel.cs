@@ -141,10 +141,7 @@ namespace ModulaLocal.ViewModels
 
         public void OnPropertyChanging(string propertyName)
         {
-            if (PropertyChanging == null)
-                return;
-
-            PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #region INotifyPropertyChanged implementation
