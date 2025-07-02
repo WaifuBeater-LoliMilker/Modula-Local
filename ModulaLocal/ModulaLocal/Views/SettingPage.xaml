@@ -33,7 +33,7 @@
                     CornerRadius="12"
                     FontSize="18"
                     HeightRequest="50"
-                    Text="Save"
+                    Text="Lưu"
                     TextColor="White" />
             </ContentView>
 

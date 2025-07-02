@@ -60,7 +60,7 @@
                 <Label
                     Grid.Row="2"
                     FontSize="Large"
-                    Text="Username"
+                    Text="Tên đăng nhập"
                     TextColor="#1C375C" />
                 <Entry
                     x:Name="UsernameEntry"
@@ -73,7 +73,7 @@
                 <Label
                     Grid.Row="5"
                     FontSize="Large"
-                    Text="Password"
+                    Text="Mật khẩu"
                     TextColor="#1C375C" />
                 <Entry
                     x:Name="PasswordEntry"
@@ -92,7 +92,7 @@
                     CornerRadius="20"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand"
-                    Text="Login"
+                    Text="Đăng nhập"
                     TextColor="White" />
                 <BoxView Grid.Row="9" />
             </Grid>

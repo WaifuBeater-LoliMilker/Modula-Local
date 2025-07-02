@@ -69,13 +69,13 @@
     </Shell.Resources>
 
 
-    <FlyoutItem Title="Dashboard" Icon="dashboard.png">
+    <FlyoutItem Title="Trang chủ" Icon="dashboard.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Setting" Icon="setting.png">
+    <FlyoutItem Title="Cài đặt" Icon="setting.png">
         <ShellContent ContentTemplate="{DataTemplate local:SettingPage}" Route="SettingPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Logout" Icon="logout.png">
+    <FlyoutItem Title="Đăng xuất" Icon="logout.png">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
     </FlyoutItem>
     <!--<FlyoutItem Title="Browse" Icon="icon_feed.png">

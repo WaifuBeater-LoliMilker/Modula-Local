@@ -68,6 +68,8 @@ namespace ModulaLocal.ViewModels
                 {
                     Items.Add(item);
                 }
+                if (focusedRow != null) focusedRow = null;
+                selectedItems?.Clear();
             }
             catch (Exception ex)
             {
@@ -80,6 +82,7 @@ namespace ModulaLocal.ViewModels
             if (FocusedRow == null)
             {
                 await App.Current.MainPage.DisplayAlert("Thông báo", "Vui lòng chọn sản phẩm trước khi gọi khay", "OK");
+                return;
             }
             var modulaStore = DependencyService.Get<ModulaStore>();
             try
@@ -103,10 +106,6 @@ namespace ModulaLocal.ViewModels
 
         private async Task OnReturn()
         {
-            if (FocusedRow == null)
-            {
-                await App.Current.MainPage.DisplayAlert("Thông báo", "Vui lòng chọn sản phẩm trước khi gọi khay", "OK");
-            }
             var modulaStore = DependencyService.Get<ModulaStore>();
             try
             {
@@ -126,23 +125,21 @@ namespace ModulaLocal.ViewModels
             try
             {
                 var rows = new List<ModulaStatusUpdate>();
-                foreach (var item in SelectedItems)
+                if(selectedItems != null && selectedItems.Count > 0)
                 {
-                    var row = new ModulaStatusUpdate
+                    foreach (var item in SelectedItems)
                     {
-                        ID = item.ID,
-                        PeopleID = item.PeopleID,
-                        StatusPerson = item.IsBorrow ? 1 : 2
-                    };
-                    rows.Add(row);
+                        var row = new ModulaStatusUpdate
+                        {
+                            ID = item.ID,
+                            PeopleID = item.PeopleID,
+                            StatusPerson = item.IsBorrow ? 1 : 2
+                        };
+                        rows.Add(row);
+                    }
+                    await modulaStore.Update(rows);
                 }
-                await modulaStore.Update(rows);
-                var result = await modulaStore.GetAll();
-                Items.Clear();
-                foreach (var item in result)
-                {
-                    Items.Add(item);
-                }
+                await Shell.Current.GoToAsync("//LoginPage");
             }
             catch (Exception ex)
             {
