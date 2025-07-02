@@ -110,14 +110,7 @@ namespace ModulaLocal.ViewModels
             var modulaStore = DependencyService.Get<ModulaStore>();
             try
             {
-                var data = new TrayInfo
-                {
-                    Code = FocusedRow.ModulaLocationCode,
-                    Name = FocusedRow.ProductCode,
-                    AxisX = FocusedRow.AxisX,
-                    AxisY = FocusedRow.AxisY
-                };
-                var result = await modulaStore.ReturnTray(data);
+                var result = await modulaStore.ReturnTray();
                 if (!result)
                     await App.Current.MainPage.DisplayAlert("Thông báo", "Thao tác không thành công, vui lòng thử lại", "OK");
             }

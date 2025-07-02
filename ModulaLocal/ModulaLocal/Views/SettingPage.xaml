@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ModulaLocal.Views.SettingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="http://xamarin.com/schemas/2020/toolkit">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="150,50,150,50"
+            Spacing="16"
+            VerticalOptions="CenterAndExpand">
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="Base URL"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+
+                <Entry
+                    x:Name="BaseURLEntry"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="Black" />
+            </StackLayout>
+            <ContentView Padding="100,0,100,0">
+                <Button
+                    BackgroundColor="#2196F3"
+                    Clicked="Button_Clicked"
+                    CornerRadius="12"
+                    FontSize="18"
+                    HeightRequest="50"
+                    Text="Save"
+                    TextColor="White" />
+            </ContentView>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

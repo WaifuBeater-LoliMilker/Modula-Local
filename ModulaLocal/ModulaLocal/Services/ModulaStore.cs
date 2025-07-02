@@ -48,24 +48,19 @@ namespace ModulaLocal.Services
                 Encoding.UTF8,
                 "application/json");
             var response = await apiService.Client.PostAsync("modulalocation/call-modula", jsonContent);
-            if (!response.IsSuccessStatusCode)
-                return false;
+               
             var json = await response.Content.ReadAsStringAsync();
-
+            var result = JsonConvert.DeserializeObject<TrayRespond>(json);
+            if (result.status == 0 || !response.IsSuccessStatusCode) throw new Exception(result.message);
             return true;
         }
-        public async Task<bool> ReturnTray(TrayInfo data)
+        public async Task<bool> ReturnTray()
         {
             var apiService = DependencyService.Get<ApiService>();
-            var jsonContent = new StringContent(
-                JsonConvert.SerializeObject(data),
-                Encoding.UTF8,
-                "application/json");
-            var response = await apiService.Client.PostAsync("modulalocation/return-modula", jsonContent);
-            if (!response.IsSuccessStatusCode)
-                return false;
+            var response = await apiService.Client.GetAsync("modulalocation/return-modula");
             var json = await response.Content.ReadAsStringAsync();
-
+            var result = JsonConvert.DeserializeObject<TrayRespond>(json);
+            if (result.status == 0 || !response.IsSuccessStatusCode) throw new Exception(result.message);
             return true;
         }
     }

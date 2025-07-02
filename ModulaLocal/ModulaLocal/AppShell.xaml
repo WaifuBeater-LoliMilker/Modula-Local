@@ -69,10 +69,13 @@
     </Shell.Resources>
 
 
-    <FlyoutItem Title="Dashboard" Icon="icon_about.png">
+    <FlyoutItem Title="Dashboard" Icon="dashboard.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Logout">
+    <FlyoutItem Title="Setting" Icon="setting.png">
+        <ShellContent ContentTemplate="{DataTemplate local:SettingPage}" Route="SettingPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Logout" Icon="logout.png">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
     </FlyoutItem>
     <!--<FlyoutItem Title="Browse" Icon="icon_feed.png">

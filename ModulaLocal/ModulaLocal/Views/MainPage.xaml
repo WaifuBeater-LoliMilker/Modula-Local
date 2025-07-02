@@ -79,11 +79,11 @@
                     HeightRequest="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="1.3*" />
+                        <ColumnDefinition Width="1.3*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1.2*" />
                     </Grid.ColumnDefinitions>
                     <CheckBox
                         x:Name="SelectAllCheckbox"
@@ -163,11 +163,11 @@
                     <Grid Padding="1" ColumnSpacing="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="1.3*" />
+                            <ColumnDefinition Width="1.3*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.2*" />
                         </Grid.ColumnDefinitions>
                         <CheckBox
                             Grid.Column="0"
@@ -190,7 +190,7 @@
                         <Label
                             Grid.Column="3"
                             FontSize="22"
-                            Text="{Binding AddressBox}"
+                            Text="{Binding ProductQRCode}"
                             TextColor="Black"
                             VerticalOptions="Center" />
                         <Label

@@ -60,10 +60,12 @@
                 <Label
                     Grid.Row="2"
                     FontSize="Large"
-                    Text="User Name"
+                    Text="Username"
                     TextColor="#1C375C" />
                 <Entry
+                    x:Name="UsernameEntry"
                     Grid.Row="3"
+                    Completed="UsernameEntry_Completed"
                     HorizontalOptions="FillAndExpand"
                     Text="{Binding Username}" />
 
@@ -74,13 +76,16 @@
                     Text="Password"
                     TextColor="#1C375C" />
                 <Entry
+                    x:Name="PasswordEntry"
                     Grid.Row="6"
+                    Completed="PasswordEntry_Completed"
                     HorizontalOptions="FillAndExpand"
                     IsPassword="True"
                     Text="{Binding Password}" />
 
                 <!--  4) Login button  -->
                 <Button
+                    x:Name="LoginButton"
                     Grid.Row="8"
                     BackgroundColor="#1C375C"
                     Command="{Binding LoginCommand}"
@@ -91,6 +96,17 @@
                     TextColor="White" />
                 <BoxView Grid.Row="9" />
             </Grid>
+            <ImageButton
+                x:Name="SettingButton"
+                Margin="16"
+                BackgroundColor="Transparent"
+                Clicked="SettingButton_Clicked"
+                CornerRadius="25"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                Source="setting.png "
+                VerticalOptions="Start"
+                WidthRequest="25" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
