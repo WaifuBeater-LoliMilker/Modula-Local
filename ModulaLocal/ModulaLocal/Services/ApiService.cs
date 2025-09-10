@@ -6,7 +6,8 @@ namespace ModulaLocal.Services
 {
     public class ApiService
     {
-        public HttpClient Client { get; }
+        public HttpClient Client { get; set; }
+        private string _token { get; set; }
 
         public ApiService()
         {
@@ -23,6 +24,7 @@ namespace ModulaLocal.Services
             if (Client.DefaultRequestHeaders.Contains("Authorization"))
                 Client.DefaultRequestHeaders.Remove("Authorization");
             Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            _token = token;
         }
         public void RemoveToken()
         {
@@ -33,8 +35,11 @@ namespace ModulaLocal.Services
             if (string.IsNullOrWhiteSpace(newBaseUrl))
                 throw new ArgumentException("Base URL cannot be empty.", nameof(newBaseUrl));
             Preferences.Set("BaseURL", newBaseUrl);
-            Client.BaseAddress = new Uri(newBaseUrl);
+            Client = new HttpClient
+            {
+                BaseAddress = new Uri(newBaseUrl)
+            };
+            Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_token}");
         }
-
     }
 }

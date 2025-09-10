@@ -1,7 +1,6 @@
 ﻿using ModulaLocal.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.DataGrid;
 
 namespace ModulaLocal
 {

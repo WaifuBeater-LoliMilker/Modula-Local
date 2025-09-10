@@ -56,9 +56,9 @@ namespace ModulaLocal.Views
                 apiService.SetBaseUrl(BaseURLEntry.Text);
                 await DisplayAlert("Thông báo", "Dữ liệu lưu thành công", "OK");
             }
-            catch
+            catch(Exception ex)
             {
-                await DisplayAlert("Thông báo", "Thao tác thất bại", "OK");
+                await DisplayAlert("Thông báo", $"Thao tác thất bại: {ex.Message}", "OK");
             }
         }
     }
